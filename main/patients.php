@@ -157,12 +157,11 @@ $doc = $_SESSION['man'];
 		  <li class="nav-item">
 			<a class="nav-link" href="javascript:void(0)">FAQ</a>
 		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href="#">Purchase Now</a>
-		  </li>
+		  
+ 
 		</ul>
     </div>
-	  &copy; <script>document.write(new Date().getFullYear())</script> <a href="https://www.multipurposethemes.com/">Multipurpose Themes</a>. All Rights Reserved.
+	  &copy; <script>document.write(new Date().getFullYear())</script> <a >Adoghe project</a>. All Rights Reserved.
   </footer>
 	
 	<!-- Page Content overlay -->

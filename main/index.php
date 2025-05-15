@@ -284,7 +284,23 @@ $doc = $_SESSION['man'];
 					  </div>
 				  </div>
 			    </div>
-				<div class="col-xl-4 col-12"> 			
+				<?php 
+
+					 $sql = "SELECT * FROM patient ORDER BY id DESC LIMIT 1";
+                                                        $result = $con->query($sql);
+                                                        $user = mysqli_num_rows($result);
+                                                        if( $user == 0 ){
+                                                            echo'
+                                                                <tr>
+                                                                    <td colspan="8">Oops! No patients have been registered</td>
+                                                                </tr>
+                                                            '
+                                                            ;
+                                                        }
+                                                        else{
+                                                            while( $tosin_req = mysqli_fetch_assoc($result) ){
+                                                                echo'
+                                                                  <div class="col-xl-4 col-12"> 			
 				  <div class="box">
 					<div class="box-header">
 					  <h4 class="box-title">Current Vitals</h4>
@@ -296,8 +312,8 @@ $doc = $_SESSION['man'];
 					</div>
 					<div class="box-body">
 					  <div class="flexbox bb-1 mb-15">
-						<div><p><span class="text-mute">Patient Name:</span> <strong>Jonsahn</strong></p></div>
-						<div><p><span class="text-mute">Patient Id:</span> <strong>1254896</strong></p></div>
+						<div><p><span class="text-mute">Patient Name:</span> <strong>'.$tosin_req['lastname'].'</strong></p></div>
+						<div><p><span class="text-mute">Patient Id:</span> <strong>'.$tosin_req['patient_id'].'</strong></p></div>
 					  </div>	
 					  <div class="row">						
 						<div class="col-12">
@@ -306,21 +322,21 @@ $doc = $_SESSION['man'];
 									<img class="img-fluid float-start w-30 mt-10 me-10" src="../images/weight.png" alt="">
 									<div>
 										<p class="mb-0"><small>Weight</small></p> 
-										<h5 class="mb-0"><strong>230 ibs</strong></h5>
+										<h5 class="mb-0"><strong>'.$tosin_req['weight'].' kg</strong></h5>
 									</div>
 								</div>							
 								<div class="col-4 bs-1 be-1">							  
 									<img class="img-fluid float-start w-30 mt-10 me-10" src="../images/human.png" alt="">
 									<div>
 										<p class="mb-0"><small>Height</small></p> 
-										<h5 class=" mb-0"><strong>6’1</strong></h5>
+										<h5 class=" mb-0"><strong>'.$tosin_req['height'].'cm</strong></h5>
 									</div>
 								</div>							
 								<div class="col-4">							  
 									<img class="img-fluid float-start w-30 mt-10 me-10" src="../images/bmi.png" alt="">
 									<div>
 										<p class="mb-0"><small>BMI</small></p> 
-										<h5 class="mb-0"><strong>30.34</strong></h5>
+										<h5 class="mb-0"><strong>'.$tosin_req['bmi'].'</strong></h5>
 									</div>
 								</div>
 							</div>
@@ -333,7 +349,7 @@ $doc = $_SESSION['man'];
 										<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
 										</div>
 									</div>
-									<h2 class="float-start mt-0 me-10"><strong>150</strong></h2>
+									<h2 class="float-start mt-0 me-10"><strong>'.$tosin_req['systolic'].'</strong></h2>
 									<div>
 										<p class="mb-0"><small>Systolic</small></p> 
 										<p class="mb-0 mt-0"><small class="vertical-align-super">mmHg</small></p>
@@ -344,7 +360,7 @@ $doc = $_SESSION['man'];
 										<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
 										</div>
 									</div>						  
-									<h2 class="float-start mt-0 me-10"><strong>90</strong></h2>
+									<h2 class="float-start mt-0 me-10"><strong>'.$tosin_req['diastolic'].'</strong></h2>
 									<div>
 										<p class="mb-0"><small>Diastolic</small></p> 
 										<p class="mb-0 mt-0"><small class="vertical-align-super">mmHg</small></p>
@@ -355,13 +371,21 @@ $doc = $_SESSION['man'];
 					  </div>
 					</div>
 					  <div class="box-body pt-0">
-						<p><small>Recorded on 25/05/2018</small></p>
+						<p><small>Recorded on '.$tosin_req['registered_at'].'</small></p>
 					  </div>
 					  <div class="box-body bg-danger">
 						  <img src="../images/smoking.png" alt="" class="float-start me-10">
-						  <p>Smoking Status : current every day smoker</p>
+						  <p>Smoking Status : '.$tosin_req['smoking'].'</p>
 					  </div>
-				</div>			
+				</div>	
+                                                                '
+                                                                ;
+                                                            }                                                    
+                                                        }
+					
+					
+					?>
+						
 				</div>
 				<div class="col-xl-4 col-12">
 					<div class="box bg-success box-inverse">
@@ -481,102 +505,7 @@ $doc = $_SESSION['man'];
 											<div class="handle"></div>
 											</button>
 										</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>Blood Count</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-warning">Law</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false" autocomplete="off">
-											<div class="handle"></div>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>Blood Count</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-danger">High</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false" autocomplete="off">
-											<div class="handle"></div>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Blood Count</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-danger">High</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false" autocomplete="off">
-											<div class="handle"></div>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Blood Count</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-warning">Law</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false" autocomplete="off">
-											<div class="handle"></div>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Blood Count</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-warning">Law</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false" autocomplete="off">
-											<div class="handle"></div>
-											</button>
-										</td>
-									</tr>							
+									</tr>						
 								</tbody>
 							  </table>
 						</div>				
@@ -700,12 +629,11 @@ $doc = $_SESSION['man'];
 		  <li class="nav-item">
 			<a class="nav-link" href="javascript:void(0)">FAQ</a>
 		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href="#">Purchase Now</a>
-		  </li>
+		  
+ 
 		</ul>
     </div>
-	  &copy; <script>document.write(new Date().getFullYear())</script> <a href="https://www.multipurposethemes.com/">Multipurpose Themes</a>. All Rights Reserved.
+	  &copy; <script>document.write(new Date().getFullYear())</script> <a >Adoghe project</a>. All Rights Reserved.
   </footer>
 
 

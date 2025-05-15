@@ -21,6 +21,8 @@ $heart_rate   = isset($_POST['heart_rate']) ? $con->real_escape_string($_POST['h
 $comment      = isset($_POST['comment']) ? $con->real_escape_string($_POST['comment']) : '';
 $advise       = isset($_POST['advise']) ? $con->real_escape_string($_POST['advise']) : '';
 $appointment  = isset($_POST['appointment']) ? $con->real_escape_string($_POST['appointment']) : '';
+$diastolic  = isset($_POST['diastolic']) ? $con->real_escape_string($_POST['diastolic']) : '';
+$systolic  = isset($_POST['systolic']) ? $con->real_escape_string($_POST['systolic']) : '';
 
 function generateRandomDocId() {
     $prefix = 'pat_';
@@ -42,11 +44,11 @@ if ($result->num_rows > 0) {
 // Insert into user_details table (customize your table accordingly)
 $insert = "INSERT INTO patient (
     firstname, lastname, city, email, phone_number, height, weight, bmi, pressure, 
-    smoking, type, allergy, temperature, heart_rate, comment, advise, appointment, patient_id
+    smoking, type, allergy, temperature, heart_rate, comment, advise, appointment, patient_id, diastolic, systolic
 ) VALUES (
     '$firstname', '$lastname', '$city', '$email', '$phone_number', '$height', '$weight', 
     '$bmi', '$pressure', '$smoking', '$type', '$allergy', '$temperature', '$heart_rate',
-    '$comment', '$advise', '$appointment', '$docId'
+    '$comment', '$advise', '$appointment', '$docId', '$diastolic', '$systolic'
 )";
 
 if ($con->query($insert)) {

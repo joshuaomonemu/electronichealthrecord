@@ -239,6 +239,14 @@ if(empty($_SESSION['man']) || $_SESSION['man'] == ''){
 									<input type="text" class="form-control required" id="heart_rate">
 								</div>
 								<div class="form-group">
+								<label for="systolic">Systolic (Top Number):</label><br>
+    							<input type="number" name="systolic" id="systolic" class="form-control required" onkeydown="triggerPrediction(event)"><br>
+								</div>
+								<div class="form-group">
+    							<label for="diastolic">Diastolic (Bottom Number):</label><br>
+    							<input type="number" name="diastolic" id="diastolic" class="form-control required" onkeydown="triggerPrediction(event)"><br>
+								</div>
+								<div class="form-group">
 									<label for="allergy" class="form-label">Body Temperature(°C):</label>
 									<input type="text" class="form-control required" id="temperature">
 								</div>
@@ -255,8 +263,8 @@ if(empty($_SESSION['man']) || $_SESSION['man'] == ''){
 									<input type="date" class="form-control required" id="appointment">
 								</div>
 								<div class="form-group">
-									<label for="advise" class="form-label">Prescription and Advise:</label>
-									<input type="text" class="form-control required" id="advise">
+									<label for="advise" class="form-label">Prescription/Advise:</label>
+									<div id="predictionResult"></div>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -286,12 +294,11 @@ if(empty($_SESSION['man']) || $_SESSION['man'] == ''){
 		  <li class="nav-item">
 			<a class="nav-link" href="javascript:void(0)">FAQ</a>
 		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href="#">Purchase Now</a>
-		  </li>
+		  
+ 
 		</ul>
     </div>
-	  &copy; <script>document.write(new Date().getFullYear())</script> <a href="https://www.multipurposethemes.com/">Multipurpose Themes</a>. All Rights Reserved.
+	  &copy; <script>document.write(new Date().getFullYear())</script> <a >Adoghe project</a>. All Rights Reserved.
   </footer>
 
 	
@@ -332,118 +339,43 @@ if(empty($_SESSION['man']) || $_SESSION['man'] == ''){
         heightInput.addEventListener('input', calculateBMI);
     </script>
 
-<!-- <script>
-// Attach event listener to the form
-document.getElementById("registrationForm").addEventListener('submit', function(event) {
-  event.preventDefault();  // Prevent the form from reloading the page
-  regUser();               // Call the function to submit the data via AJAX
-});
+	<script>
+const systolicInput = document.getElementById('systolic');
+const diastolicInput = document.getElementById('diastolic');
 
-function regUser(){
-  // Retrieve form values
-  let firstname    = document.getElementById("firstname").value;
-  let lastname     = document.getElementById("lastname").value;
-  let city         = document.getElementById("city") ? document.getElementById("city").value : "";
-  let email        = document.getElementById("email") ? document.getElementById("email").value : "";
-  let phone_number = document.getElementById("phone_number") ? document.getElementById("phone_number").value : "";
-  let height       = document.getElementById("height") ? document.getElementById("height").value : "";
-  let weight       = document.getElementById("weight") ? document.getElementById("weight").value : "";
-  let bmi          = document.getElementById("bmiResult") ? document.getElementById("bmiResult").value : "";
-  let pressure     = document.getElementById("pressure") ? document.getElementById("pressure").value : "";
-  let smoking      = document.getElementById("smoking") ? document.getElementById("smoking").value : "";
-  let type         = document.getElementById("type") ? document.getElementById("type").value : "";
-  let allergy      = document.getElementById("allergy") ? document.getElementById("allergy").value : "";
-  let temperature  = document.getElementById("temperature") ? document.getElementById("temperature").value : "";
-  let heart_rate   = document.getElementById("heart_rate") ? document.getElementById("heart_rate").value : "";
-  let comment      = document.getElementById("comment") ? document.getElementById("comment").value : "";
-  let advise       = document.getElementById("advise") ? document.getElementById("advise").value : "";
-  let appointment  = document.getElementById("appointment") ? document.getElementById("appointment").value : "";
-  
-  // Prepare the data string to be sent via POST (update the keys as required by your back-end)
-  let postData = "firstname=" + encodeURIComponent(firstname) +
-                 "&lastname=" + encodeURIComponent(lastname) +
-                 "&city=" + encodeURIComponent(city) +
-                 "&email=" + encodeURIComponent(email) +
-                 "&phone_number=" + encodeURIComponent(phone_number) +
-                 "&height=" + encodeURIComponent(height) +
-                 "&weight=" + encodeURIComponent(weight) +
-                 "&bmi=" + encodeURIComponent(bmi) +
-                 "&pressure=" + encodeURIComponent(pressure) +
-                 "&smoking=" + encodeURIComponent(smoking) +
-                 "&type=" + encodeURIComponent(type) +
-                 "&allergy=" + encodeURIComponent(allergy) +
-                 "&temperature=" + encodeURIComponent(temperature) +
-                 "&heart_rate=" + encodeURIComponent(heart_rate) +
-                 "&comment=" + encodeURIComponent(comment) +
-                 "&advise=" + encodeURIComponent(advise) +
-                 "&appointment=" + encodeURIComponent(appointment);
+// systolicInput.addEventListener("keydown", triggerPrediction);
+// diastolicInput.addEventListener("keydown", triggerPrediction);
 
-  // Create XMLHttpRequest
-  let xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    // Check if the request is complete
-    if(this.readyState === 4) {
-      if(this.status === 200) {
-        // Trim the response to remove any extra whitespace
-        let trimmedResponse = this.responseText.trim();
+let timeout = null;
 
-        // Determine what to show based on the response text
-        if(trimmedResponse === "error1"){
-          Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'error',
-            title: 'Sorry, this email is in use',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true
-          });
-        } else if(trimmedResponse === "dberror") {
-          Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'error',
-            title: 'Sorry, an error occurred',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true
-          });
-        } else {
-          Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'success',
-            title: 'In process',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true
-          });
-          // Redirect after 60 seconds, ensuring the callback is passed to setTimeout
-          setTimeout(function(){
-            window.location.href = "verify2.php";
-          }, 60000);
+function triggerPrediction() {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        const systolic = systolicInput.value;
+        const diastolic = diastolicInput.value;
+
+        if (systolic && diastolic) {
+            const formData = new FormData();
+            formData.append('systolic', systolic);
+            formData.append('diastolic', diastolic);
+
+            fetch('actions/check_vitals.php', {
+                method: 'POST',
+
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('predictionResult').innerHTML = data;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
         }
-      } else {
-        // Handle HTTP errors (if needed)
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'error',
-          title: 'Request failed. Please try again.',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true
-        });
-      }
-    }
-  };
-
-  // Open and send the POST request
-  xhttp.open("POST", "actions/add_patient.php", true);
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send(postData);
+    }, 500); // delay to avoid firing too often
 }
-</script> -->
+</script>
+
 
     
 	

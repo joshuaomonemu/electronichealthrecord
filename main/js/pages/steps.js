@@ -66,6 +66,8 @@ function regUser(){
   let firstname    = document.getElementById("firstname").value;
   let lastname     = document.getElementById("lastname").value;
   let city         = document.getElementById("city") ? document.getElementById("city").value : "";
+  let diastolic         = document.getElementById("city") ? document.getElementById("diastolic").value : "";
+  let systolic         = document.getElementById("city") ? document.getElementById("systolic").value : "";
   let email        = document.getElementById("email") ? document.getElementById("email").value : "";
   let phone_number = document.getElementById("phone_number") ? document.getElementById("phone_number").value : "";
   let height       = document.getElementById("height") ? document.getElementById("height").value : "";
@@ -86,6 +88,8 @@ function regUser(){
                  "&lastname=" + encodeURIComponent(lastname) +
                  "&city=" + encodeURIComponent(city) +
                  "&email=" + encodeURIComponent(email) +
+                 "&systolic=" + encodeURIComponent(systolic) +
+                 "&diastolic=" + encodeURIComponent(diastolic) +
                  "&phone_number=" + encodeURIComponent(phone_number) +
                  "&height=" + encodeURIComponent(height) +
                  "&weight=" + encodeURIComponent(weight) +

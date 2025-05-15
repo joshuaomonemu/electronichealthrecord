@@ -78,8 +78,23 @@ $doc = $_SESSION['doc'];
 		<section class="content">
 			<div class="row">
 
-			  
-			  <div class="col-12 col-lg-4">
+			 <?php
+                                                        //$tosin = mysqli_query($con,"SELECT * FROM users_details");
+                                                        $sql = "SELECT * FROM users WHERE id > 0";
+                                                        $result = $con->query($sql);
+                                                        $user = mysqli_num_rows($result);
+                                                        if( $user == 0 ){
+                                                            echo'
+                                                                <tr>
+                                                                    <td colspan="8">Oops! No Doctors have been registered</td>
+                                                                </tr>
+                                                            '
+                                                            ;
+                                                        }
+                                                        else{
+                                                            while( $tosin_req = mysqli_fetch_assoc($result) ){
+                                                                echo'
+                                                                   <div class="col-12 col-lg-4">
 				<div class="box">
 				  <div class="box-header no-border p-0">				
 					<a href="#">
@@ -94,12 +109,20 @@ $doc = $_SESSION['doc'];
 							<a href="#" class="btn btn-circle mb-5 btn-twitter"><i class="fa fa-twitter"></i></a>
 							<a href="#" class="btn btn-circle mb-5 btn-warning"><i class="fa fa-envelope"></i></a>				
 						</div>
-						<h3 class="my-10"><a href="#">Dr. Isabella</a></h3>
-						<h6 class="user-info mt-0 mb-10 text-fade">Nursingc</h6>
+						<h3 class="my-10"><a href="#">'.$tosin_req['fullname'].'</a></h3>
+						<h6 class="user-info mt-0 mb-10 text-fade">Doctor</h6>
 					  </div>
 				  </div>
 				</div>
 			  </div>
+                                                                '
+                                                                ;
+                                                            }                                                    
+                                                        }
+                                                    ?>  
+
+			  
+			  
 			</div>
 		</section>
 		<!-- /.content -->

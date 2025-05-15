@@ -5,8 +5,10 @@
 			<a href="index.php" class="logo">
 			  <!-- logo-->
 			  <div class="logo-lg">
-				  <span class="light-logo"><img src="../images/logo-dark-text.png" alt="logo"></span>
+				<center>
+				  <span class="light-logo"><img src="../images/logo-dark-text.png" alt="logo" style="height: 52px;"></span>
 				  <span class="dark-logo"><img src="../images/logo-light-text.png" alt="logo"></span>
+				</center>
 			  </div>
 			</a>	
 		</div>  
@@ -54,10 +56,6 @@
 				</a>
 				<ul class="dropdown-menu animated flipInX">
 				  <li class="user-body">
-					 <a class="dropdown-item" href="#"><i class="ti-user text-muted me-2"></i> Profile</a>
-					 <a class="dropdown-item" href="#"><i class="ti-wallet text-muted me-2"></i> My Wallet</a>
-					 <a class="dropdown-item" href="#"><i class="ti-settings text-muted me-2"></i> Settings</a>
-					 <div class="dropdown-divider"></div>
 					 <a class="dropdown-item" href="#"><i class="ti-lock text-muted me-2"></i> Logout</a>
 				  </li>
 				</ul>
