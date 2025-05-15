@@ -1,21 +1,20 @@
 <?php
-$serverName = "tcp:adogheproject-server.database.windows.net,1433";
-$connectionInfo = array(
-    "UID" => "adoghe",
-    "PWD" => "Mylovefordogs1$",
-    "Database" => "adoghe-project",
-    "Encrypt" => 1,
-    "TrustServerCertificate" => 0,
-    "LoginTimeout" => 30
-);
+$server = "tcp:adogheproject-server.database.windows.net,1433";
+$database = "adoghe-project";
+$username = "adoghe";
+$password = "Mylovefordogs1$";
 
-$conn = sqlsrv_connect($serverName, $connectionInfo);
+// ODBC DSN connection string
+$dsn = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;Encrypt=yes;TrustServerCertificate=no;";
+
+// Establish connection
+$conn = odbc_connect($dsn, $username, $password);
 
 if (!$conn) {
     echo "Error connecting to SQL Server.<br>";
-    print_r(sqlsrv_errors());
+    echo odbc_errormsg();
     exit;
 }
 
-echo "Connected successfully!";
+echo "Connected successfully to Azure SQL via ODBC!";
 ?>
