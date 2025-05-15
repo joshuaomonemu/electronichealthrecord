@@ -1,36 +1,16 @@
 <?php
-
-                	// $servername = "localhost";
-					// $dbusername = "root";
-					// $dbpassword = "";
-					// $dbname = "adoghe";
-
-					// $con = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-					// if ($con->connect_error) {
-					// die("Connection failed: " . $con->connect_error);
-					// }
-?> 
-
-<?php
-//Define connection parameters
-$serverName = "tcp:adogheproject-server.database.windows.net,1433";
-$connectionOptions = array(
-    "UID" => "adoghe",
-    "PWD" => "Mylovefordogs1$",  // Replace with your actual password
-    "Database" => "adoghe-project",
-    "LoginTimeout" => 30,
-    "Encrypt" => 1,
-    "TrustServerCertificate" => 0
-);
-
-// Attempt to connect to SQL Server
-$con = sqlsrv_connect($serverName, $connectionOptions);
-
-if ($con === false) {
-    echo "Error connecting to SQL Server.<br>";
-    die(print_r(sqlsrv_errors(), true));
+// PHP Data Objects(PDO) Sample Code:
+try {
+    $conn = new PDO("sqlsrv:server = tcp:adogheproject-server.database.windows.net,1433; Database = adoghe-project", "adoghe", "{your_password_here}");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch (PDOException $e) {
+    print("Error connecting to SQL Server.");
+    die(print_r($e));
 }
 
-// You can now use $conn to execute queries
-?> 
+// SQL Server Extension Sample Code:
+$connectionInfo = array("UID" => "adoghe", "pwd" => "Mylovefordogs1$", "Database" => "adoghe-project", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+$serverName = "tcp:adogheproject-server.database.windows.net,1433";
+$conn = sqlsrv_connect($serverName, $connectionInfo);
+?>
