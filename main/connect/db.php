@@ -17,7 +17,7 @@
 $serverName = "tcp:adogheproject-server.database.windows.net,1433";
 $connectionOptions = array(
     "UID" => "adoghe",
-    "PWD" => "{your_password_here}",  // Replace with your actual password
+    "PWD" => "Mylovefordogs1$",  // Replace with your actual password
     "Database" => "adoghe-project",
     "LoginTimeout" => 30,
     "Encrypt" => 1,
