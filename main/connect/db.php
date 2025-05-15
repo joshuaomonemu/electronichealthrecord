@@ -8,9 +8,9 @@ $password = "Mylovefordogs1$";
 $dsn = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;Encrypt=yes;TrustServerCertificate=no;";
 
 // Establish connection
-$conn = odbc_connect($dsn, $username, $password);
+$con = odbc_connect($dsn, $username, $password);
 
-if (!$conn) {
+if (!$con) {
     echo "Error connecting to SQL Server.<br>";
     echo odbc_errormsg();
     exit;
