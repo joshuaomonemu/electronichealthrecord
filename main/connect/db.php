@@ -1,18 +1,21 @@
 <?php
 $serverName = "tcp:adogheproject-server.database.windows.net,1433";
-$connectionOptions = array(
+$connectionInfo = array(
     "UID" => "adoghe",
-    "PWD" => "Mylovefordogs1$",  // ✅ no {} or quotes
+    "PWD" => "Mylovefordogs1$",
     "Database" => "adoghe-project",
     "Encrypt" => 1,
     "TrustServerCertificate" => 0,
-    "LoginTimeout" => 30,
+    "LoginTimeout" => 30
 );
 
-$conn = sqlsrv_connect($serverName, $connectionOptions);
+$conn = sqlsrv_connect($serverName, $connectionInfo);
 
-if ($conn === false) {
+if (!$conn) {
     echo "Error connecting to SQL Server.<br>";
-    die(print_r(sqlsrv_errors(), true));
+    print_r(sqlsrv_errors());
+    exit;
 }
+
+echo "Connected successfully!";
 ?>
