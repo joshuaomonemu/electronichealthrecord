@@ -1,20 +1,16 @@
 <?php
-$server = "tcp:adogheproject-server.database.windows.net,1433";
-$database = "adoghe-project";
-$username = "adoghe";
-$password = "Mylovefordogs1$";
+$host = 'nozomi.proxy.rlwy.net';
+$port = 46177;
+$user = 'root';
+$password = 'ELKvJGsHuzcyADbsOABGJAlFREOJjWGX';  // Replace with the actual password from Railway
+$database = 'railway';             // This is your default Railway DB name
 
-// ODBC DSN connection string
-$dsn = "Driver={ODBC Driver 17 for SQL Server};Server=$server;Database=$database;Encrypt=yes;TrustServerCertificate=no;";
-
-// Establish connection
-$con = odbc_connect($dsn, $username, $password);
+// Connect using procedural MySQLi
+$con = mysqli_connect($host, $user, $password, $database, $port);
 
 if (!$con) {
-    echo "Error connecting to SQL Server.<br>";
-    echo odbc_errormsg();
-    exit;
+    die("Connection failed: " . mysqli_connect_error());
 }
 
-echo "Connected successfully to Azure SQL via ODBC!";
+// echo "✅ Connected successfully to Railway MySQL!";
 ?>
