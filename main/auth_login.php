@@ -122,7 +122,7 @@
 							  icon: 'success',
 							  title: 'Signed in successfully'
 							})
-							setTimeout(window.location.href = "index.php", 60000);
+							setTimeout(window.location.href = "patients.php", 60000);
 						}   
             else{
               const Toast = Swal.mixin({
